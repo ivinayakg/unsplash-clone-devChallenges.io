@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseURL = "http://localhost:8000/";
+const baseURL = "https://image-library.herokuapp.com/";
 
 export default axios.create({
   baseURL,
