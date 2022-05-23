@@ -62,15 +62,9 @@ app.get(
         .skip(Number(skip))
         .limit(Number(limit));
 
-      setTimeout(() => {
-        return res
-          .status(200)
-          .json({ success: true, data: { photos: shuffle(photos) } });
-      }, 1200);
-
-      // return res
-      //   .status(200)
-      //   .json({ success: true, data: { photos: shuffle(photos) } });
+      return res
+        .status(200)
+        .json({ success: true, data: { photos: shuffle(photos) } });
     } catch (error) {
       res
         .status(500)
