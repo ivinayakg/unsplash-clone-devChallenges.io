@@ -11,14 +11,9 @@ const xss = require("xss-clean");
 const mongooseSanitize = require("express-mongo-sanitize");
 const cors = require("cors");
 
-const whitelist = ["https://imagelibrary.netlify.app"];
 const corsOptions = {
   origin: function (origin, callback) {
-    if (whitelist.indexOf(origin) !== -1) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS"));
-    }
+    callback(null, true);
   },
 };
 
