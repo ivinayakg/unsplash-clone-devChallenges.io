@@ -1,0 +1,51 @@
+.photo {
+  width: 100%;
+  height: max-content;
+  display: grid;
+  grid-template-areas: "overflow";
+}
+
+.photo > * {
+  grid-area: overflow;
+}
+
+.photo img {
+  width: 100%;
+  object-fit: contain;
+  border-radius: 10px;
+}
+
+.delete,
+.label {
+  display: none;
+  opacity: 0;
+  transition: ease-in 250ms;
+  z-index: 5;
+}
+
+.photo:hover .delete,
+.photo:hover .label {
+  opacity: 1;
+  display: block;
+}
+
+.delete {
+  width: 100px;
+  max-width: 50%;
+  padding: 10px 0px;
+  height: min-content;
+  margin: 8px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: rgb(238, 44, 44);
+  margin-left: auto;
+  border-radius: 10px;
+  background-color: transparent;
+  border: 2px solid rgb(238, 44, 44);
+}
+
+.label {
+  color: white;
+  margin: 8px;
+  margin-top: auto;
+}

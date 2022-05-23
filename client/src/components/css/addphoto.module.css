@@ -1,0 +1,66 @@
+.back {
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  background-color: rgba(0, 0, 0, 0.6);
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  gap: 6px;
+  padding: 1.2rem;
+  background-color: white;
+  border-radius: 10px;
+  max-width: 80vw;
+  width: 550px;
+  font-size: 1.2rem;
+}
+
+.heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.modal label {
+  font-weight: 600;
+}
+
+.modal input {
+  margin-bottom: 6px;
+  padding: 8px;
+  border: 2px solid rgba(0, 0, 0, 0.6);
+  border-radius: 10px;
+}
+
+.modal button {
+  background-color: #1d1d1d;
+  color: white;
+  padding: 6px 10px;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 10px;
+}
+
+button.cross {
+  background-color: transparent;
+  padding: 0px;
+}
+
+.cross svg {
+  width: 30px;
+  height: 30px;
+  margin: auto;
+  background-color: #1d1d1d;
+  padding: 4px;
+  border-radius: 10px;
+}

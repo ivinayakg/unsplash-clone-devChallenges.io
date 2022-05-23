@@ -1,6 +1,7 @@
 require("express-async-errors");
 require("dotenv").config();
 const Photo = require("./photoModel");
+const shuffle = require("./utils/shuffle");
 
 const express = require("express");
 const app = express();
@@ -8,7 +9,21 @@ const mongoose = require("mongoose");
 
 const xss = require("xss-clean");
 const mongooseSanitize = require("express-mongo-sanitize");
+const cors = require("cors");
 
+const whitelist = ["http://localhost:3000"];
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(null, true);
+      // callback(new Error("Not allowed by CORS"));
+    }
+  },
+};
+
+app.use(cors(corsOptions));
 app.use(xss());
 app.use(mongooseSanitize());
 app.use(express.json({ limit: "15mb" }));
@@ -29,19 +44,42 @@ app.post("/upload", async (req, res) => {
   }
 });
 
-app.get("/all/:start/:end", async (req, res) => {
-  let { start, end } = req.params;
+app.get(
+  ["/all/:skip/:limit/:label", "/all/:skip/:limit/"],
+  async (req, res) => {
+    let { skip, limit, label } = req.params;
 
-  try {
-    const photos = await Photo.find({}).skip(Number(start)).limit(Number(end));
-    return res.status(200).json({ success: true, data: { photos } });
-  } catch (error) {
-    res
-      .status(500)
-      .json({ success: false, message: "Something Went Wrong", error });
-    console.log(error);
+    if (!label) {
+      label = "";
+    }
+
+    const regexValue = new RegExp(
+      `(${label}|${label.toUpperCase()}|{${label.toLowerCase()}})`
+    );
+    try {
+      const photos = await Photo.find({
+        label: { $regex: regexValue, $options: "i" },
+      })
+        .skip(Number(skip))
+        .limit(Number(limit));
+
+      setTimeout(() => {
+        return res
+          .status(200)
+          .json({ success: true, data: { photos: shuffle(photos) } });
+      }, 1200);
+
+      // return res
+      //   .status(200)
+      //   .json({ success: true, data: { photos: shuffle(photos) } });
+    } catch (error) {
+      res
+        .status(500)
+        .json({ success: false, message: "Something Went Wrong", error });
+      console.log(error);
+    }
   }
-});
+);
 
 app.get("/all-label/:label", async (req, res) => {
   let { label } = req.params;

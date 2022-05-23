@@ -1,0 +1,33 @@
+.header {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1.2rem 4rem;
+}
+
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1000px;
+}
+
+.search {
+  border: 2px solid rgba(0, 0, 0, 0.75);
+  border-radius: 10px;
+  padding: 1.2rem;
+  width: 30%;
+  height: 2rem;
+  font-size: 1.2rem;
+}
+
+.upload {
+  background-color: #1d1d1d;
+  color: white;
+  padding: 6px 10px;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 10px;
+}
