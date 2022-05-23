@@ -12,9 +12,7 @@ const mongooseSanitize = require("express-mongo-sanitize");
 const cors = require("cors");
 
 const corsOptions = {
-  origin: function (origin, callback) {
-    callback(null, true);
-  },
+  origin: "*",
 };
 
 app.use(cors(corsOptions));
